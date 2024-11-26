@@ -37,12 +37,16 @@ function App() {
   }, []);
 
   const handleChatSelect = useCallback((uniqueTitle) => {
+    if (uniqueTitle === currentTitle) {
+      // If the user clicks on the currently active chat, do nothing
+      return;
+  }
     setCurrentTitle(uniqueTitle);
     setMessage(null);
     setValue("");
     setPage(1);
     setDisplayedMessages([]);
-  }, []);
+  }, [currentTitle]);
 
   const getMessages = async () => {
     if (!value.trim()) return;
@@ -119,7 +123,7 @@ function App() {
         onChatSelect={handleChatSelect}
       />
       <div className="flex flex-col flex-grow justify-between items-center text-white">
-        {!currentTitle && <h1 className="text-3xl mt-4">RohitGPT with React + Node.js</h1>}
+        {!currentTitle && <h1 className="text-3xl mt-4">Jarvis with react + node.js</h1>}
         <MessageList
           messages={displayedMessages}
           onScroll={handleScroll}
